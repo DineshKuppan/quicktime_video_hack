@@ -1,4 +1,4 @@
-module github.com/danielpaulus/quicktime_video_hack
+module github.com/Dineshkuppan/quicktime_video_hack
 
 go 1.16
 
