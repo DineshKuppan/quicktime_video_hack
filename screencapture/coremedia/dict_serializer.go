@@ -2,11 +2,12 @@ package coremedia
 
 import (
 	"encoding/binary"
-	"github.com/danielpaulus/quicktime_video_hack/screencapture/common"
 	"log"
+
+	"github.com/DineshKuppan/quicktime_video_hack/screencapture/common"
 )
 
-//SerializeStringKeyDict serializes a StringKeyDict into a []byte
+// SerializeStringKeyDict serializes a StringKeyDict into a []byte
 func SerializeStringKeyDict(stringKeyDict StringKeyDict) []byte {
 	buffer := make([]byte, 1024*1024)
 	var slice = buffer[8:]

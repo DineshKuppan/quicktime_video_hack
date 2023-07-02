@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/danielpaulus/quicktime_video_hack/screencapture/common"
+	"github.com/DineshKuppan/quicktime_video_hack/screencapture/common"
 )
 
 // Dictionary related magic marker constants
@@ -21,34 +21,34 @@ const (
 	StringValueMagic  uint32 = 0x73747276 //strv - vrts
 )
 
-//StringKeyDict a dictionary that uses strings as keys with an array of StringKeyEntry
+// StringKeyDict a dictionary that uses strings as keys with an array of StringKeyEntry
 type StringKeyDict struct {
 	Entries []StringKeyEntry
 }
 
-//StringKeyEntry a pair of a string key and an arbitrary value
+// StringKeyEntry a pair of a string key and an arbitrary value
 type StringKeyEntry struct {
 	Key   string
 	Value interface{}
 }
 
-//IndexKeyDict a dictionary that uses uint16 as keys with an array of IndexKeyEntry
+// IndexKeyDict a dictionary that uses uint16 as keys with an array of IndexKeyEntry
 type IndexKeyDict struct {
 	Entries []IndexKeyEntry
 }
 
-//IndexKeyEntry is a pair of a uint16 key and an arbitrary value.
+// IndexKeyEntry is a pair of a uint16 key and an arbitrary value.
 type IndexKeyEntry struct {
 	Key   uint16
 	Value interface{}
 }
 
-//NewIndexDictFromBytes creates a new dictionary assuming the byte array starts with the 4 byte length of the dictionary followed by "dict" as the magic marker
+// NewIndexDictFromBytes creates a new dictionary assuming the byte array starts with the 4 byte length of the dictionary followed by "dict" as the magic marker
 func NewIndexDictFromBytes(data []byte) (IndexKeyDict, error) {
 	return NewIndexDictFromBytesWithCustomMarker(data, DictionaryMagic)
 }
 
-//NewIndexDictFromBytesWithCustomMarker creates a new dictionary assuming the byte array starts with the 4 byte length of the dictionary followed by magic as the magic marker
+// NewIndexDictFromBytesWithCustomMarker creates a new dictionary assuming the byte array starts with the 4 byte length of the dictionary followed by magic as the magic marker
 func NewIndexDictFromBytesWithCustomMarker(data []byte, magic uint32) (IndexKeyDict, error) {
 	_, remainingBytes, err := common.ParseLengthAndMagic(data, magic)
 	if err != nil {
@@ -72,7 +72,7 @@ func NewIndexDictFromBytesWithCustomMarker(data []byte, magic uint32) (IndexKeyD
 	return dict, nil
 }
 
-//NewStringDictFromBytes creates a new dictionary assuming the byte array starts with the 4 byte length of the dictionary followed by "dict" as the magic marker
+// NewStringDictFromBytes creates a new dictionary assuming the byte array starts with the 4 byte length of the dictionary followed by "dict" as the magic marker
 func NewStringDictFromBytes(data []byte) (StringKeyDict, error) {
 	_, remainingBytes, err := common.ParseLengthAndMagic(data, DictionaryMagic)
 	if err != nil {
@@ -109,7 +109,7 @@ func parseIntDictEntry(bytes []byte) (IndexKeyEntry, error) {
 	return IndexKeyEntry{Key: key, Value: value}, nil
 }
 
-//ParseKeyValueEntry parses a byte array into a StringKeyEntry assuming the array starts with a 4 byte length followed by the "keyv" magic
+// ParseKeyValueEntry parses a byte array into a StringKeyEntry assuming the array starts with a 4 byte length followed by the "keyv" magic
 func ParseKeyValueEntry(data []byte) (StringKeyEntry, error) {
 	keyValuePairLength, _, err := common.ParseLengthAndMagic(data, KeyValuePairMagic)
 	if err != nil {

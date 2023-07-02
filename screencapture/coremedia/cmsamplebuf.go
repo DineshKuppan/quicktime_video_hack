@@ -5,13 +5,13 @@ import (
 	"encoding/hex"
 	"fmt"
 
-	"github.com/danielpaulus/quicktime_video_hack/screencapture/common"
+	"github.com/DineshKuppan/quicktime_video_hack/screencapture/common"
 )
 
-//CMItemCount is a simple typedef to int to be a bit closer to MacOS/iOS
+// CMItemCount is a simple typedef to int to be a bit closer to MacOS/iOS
 type CMItemCount = int
 
-//https://github.com/phracker/MacOSX-SDKs/blob/master/MacOSX10.9.sdk/System/Library/Frameworks/CoreMedia.framework/Versions/A/Headers/CMSampleBuffer.h
+// https://github.com/phracker/MacOSX-SDKs/blob/master/MacOSX10.9.sdk/System/Library/Frameworks/CoreMedia.framework/Versions/A/Headers/CMSampleBuffer.h
 const (
 	sbuf uint32 = 0x73627566 //the cmsamplebuf and only content of feed asyns
 	opts uint32 = 0x6F707473 //output presentation timestamp?
@@ -25,7 +25,7 @@ const (
 	cmSampleTimingInfoLength = 3 * CMTimeLengthInBytes
 )
 
-//CMSampleTimingInfo is a simple struct containing 3 CMtimes: Duration, PresentationTimeStamp and DecodeTimeStamp
+// CMSampleTimingInfo is a simple struct containing 3 CMtimes: Duration, PresentationTimeStamp and DecodeTimeStamp
 type CMSampleTimingInfo struct {
 	Duration CMTime /*! @field duration
 	The duration of the sample. If a single struct applies to
@@ -49,8 +49,8 @@ func (buffer CMSampleBuffer) HasSampleData() bool {
 	return buffer.SampleData != nil
 }
 
-//CMSampleBuffer represents the CoreMedia class used to exchange AV SampleData and contains meta information like timestamps or
-//optional FormatDescriptors
+// CMSampleBuffer represents the CoreMedia class used to exchange AV SampleData and contains meta information like timestamps or
+// optional FormatDescriptors
 type CMSampleBuffer struct {
 	OutputPresentationTimestamp CMTime
 	FormatDescription           FormatDescriptor
@@ -81,17 +81,17 @@ func (buffer CMSampleBuffer) String() string {
 		fdscString)
 }
 
-//NewCMSampleBufferFromBytesAudio parses a CMSampleBuffer containing audio data.
+// NewCMSampleBufferFromBytesAudio parses a CMSampleBuffer containing audio data.
 func NewCMSampleBufferFromBytesAudio(data []byte) (CMSampleBuffer, error) {
 	return NewCMSampleBufferFromBytes(data, MediaTypeSound)
 }
 
-//NewCMSampleBufferFromBytesVideo parses a CMSampleBuffer containing audio video.
+// NewCMSampleBufferFromBytesVideo parses a CMSampleBuffer containing audio video.
 func NewCMSampleBufferFromBytesVideo(data []byte) (CMSampleBuffer, error) {
 	return NewCMSampleBufferFromBytes(data, MediaTypeVideo)
 }
 
-//NewCMSampleBufferFromBytes parses a CMSampleBuffer from a []byte assuming it begins with a 4 byte length and the 4byte magic int "sbuf"
+// NewCMSampleBufferFromBytes parses a CMSampleBuffer from a []byte assuming it begins with a 4 byte length and the 4byte magic int "sbuf"
 func NewCMSampleBufferFromBytes(data []byte, mediaType uint32) (CMSampleBuffer, error) {
 	var sbuffer CMSampleBuffer
 	sbuffer.MediaType = mediaType

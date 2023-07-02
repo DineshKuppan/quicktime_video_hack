@@ -1,12 +1,13 @@
 package common_test
 
 import (
-	"github.com/danielpaulus/quicktime_video_hack/screencapture/common"
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/DineshKuppan/quicktime_video_hack/screencapture/common"
+	"github.com/stretchr/testify/assert"
 )
 
-//I took these from hexdumps
+// I took these from hexdumps
 var typeSix = []byte{0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x9E, 0x40}
 var typeFive = []byte{0x05, 0x2E, 00, 00, 00}
 var typeFour = []byte{0x04, 0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}

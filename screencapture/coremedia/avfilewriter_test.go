@@ -6,7 +6,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/danielpaulus/quicktime_video_hack/screencapture/coremedia"
+	"github.com/DineshKuppan/quicktime_video_hack/screencapture/coremedia"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -7,14 +7,14 @@ import (
 	"sync"
 	"time"
 
-	"github.com/danielpaulus/quicktime_video_hack/screencapture/coremedia"
+	"github.com/DineshKuppan/quicktime_video_hack/screencapture/coremedia"
 	log "github.com/sirupsen/logrus"
 )
 
-//CSVHeader contains the header for the metrics file
+// CSVHeader contains the header for the metrics file
 const CSVHeader = "audioSamplesRcv, audioBytesRcv, videoSamplesRcv, videoBytesRcv, heapobjects, alloc\n"
 
-//DiagnosticsConsumer periodically logs samples received, bytes received and memory stats to a csv file.
+// DiagnosticsConsumer periodically logs samples received, bytes received and memory stats to a csv file.
 type DiagnosticsConsumer struct {
 	outFileWriter   io.Writer
 	audioSamplesRcv uint64
@@ -27,7 +27,7 @@ type DiagnosticsConsumer struct {
 	stopDone        chan struct{}
 }
 
-//NewDiagnosticsConsumer creates a new DiagnosticsConsumer
+// NewDiagnosticsConsumer creates a new DiagnosticsConsumer
 func NewDiagnosticsConsumer(outfile io.Writer, interval time.Duration) *DiagnosticsConsumer {
 	d := &DiagnosticsConsumer{outFileWriter: outfile, interval: interval, stop: make(chan struct{}), stopDone: make(chan struct{})}
 	go fileWriter(d)
@@ -70,7 +70,7 @@ func readAndReset(d *DiagnosticsConsumer) (uint64, uint64, uint64, uint64) {
 	return audioSamplesRcv, audioBytesRcv, videoSamplesRcv, videoBytesRcv
 }
 
-//Consume logs stats
+// Consume logs stats
 func (d *DiagnosticsConsumer) Consume(buf coremedia.CMSampleBuffer) error {
 	d.mux.Lock()
 	defer d.mux.Unlock()
@@ -93,7 +93,7 @@ func (d *DiagnosticsConsumer) consumeVideo(buf coremedia.CMSampleBuffer) error {
 	return nil
 }
 
-//Stop writing to the csv file
+// Stop writing to the csv file
 func (d *DiagnosticsConsumer) Stop() {
 	close(d.stop)
 	<-d.stopDone

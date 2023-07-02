@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/danielpaulus/quicktime_video_hack/screencapture/coremedia"
+	"github.com/DineshKuppan/quicktime_video_hack/screencapture/coremedia"
 )
 
 // AsynSratPacket is probably related to AVPlayer.SetRate somehow. I dont know exactly what everything means here
@@ -16,7 +16,7 @@ type AsynSratPacket struct {
 	Time     coremedia.CMTime
 }
 
-//NewAsynSratPacketFromBytes parses a new AsynSratPacket from bytes
+// NewAsynSratPacketFromBytes parses a new AsynSratPacket from bytes
 func NewAsynSratPacketFromBytes(data []byte) (AsynSratPacket, error) {
 	var packet = AsynSratPacket{}
 	remainingBytes, clockRef, err := ParseAsynHeader(data, SRAT)

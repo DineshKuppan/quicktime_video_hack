@@ -4,16 +4,16 @@ import (
 	"encoding/binary"
 	"fmt"
 
-	"github.com/danielpaulus/quicktime_video_hack/screencapture/coremedia"
+	"github.com/DineshKuppan/quicktime_video_hack/screencapture/coremedia"
 )
 
-//AsynCmSampleBufPacket contains a CMSampleBuffer with audio or video data
+// AsynCmSampleBufPacket contains a CMSampleBuffer with audio or video data
 type AsynCmSampleBufPacket struct {
 	ClockRef    CFTypeID
 	CMSampleBuf coremedia.CMSampleBuffer
 }
 
-//NewAsynCmSampleBufPacketFromBytes parses a new AsynCmSampleBufPacket from bytes
+// NewAsynCmSampleBufPacketFromBytes parses a new AsynCmSampleBufPacket from bytes
 func NewAsynCmSampleBufPacketFromBytes(data []byte) (AsynCmSampleBufPacket, error) {
 	clockRef, sBuf, err := newAsynCmSampleBufferPacketFromBytes(data)
 	if err != nil {

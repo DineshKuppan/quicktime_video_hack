@@ -4,16 +4,16 @@ import (
 	"encoding/binary"
 	"fmt"
 
-	"github.com/danielpaulus/quicktime_video_hack/screencapture/coremedia"
+	"github.com/DineshKuppan/quicktime_video_hack/screencapture/coremedia"
 )
 
-//SyncTimePacket contains the data from a decoded Time Packet sent by the device
+// SyncTimePacket contains the data from a decoded Time Packet sent by the device
 type SyncTimePacket struct {
 	ClockRef      CFTypeID
 	CorrelationID uint64
 }
 
-//NewSyncTimePacketFromBytes parses a SyncTimePacket from bytes
+// NewSyncTimePacketFromBytes parses a SyncTimePacket from bytes
 func NewSyncTimePacketFromBytes(data []byte) (SyncTimePacket, error) {
 	_, clockRef, correlationID, err := ParseSyncHeader(data, TIME)
 	if err != nil {
@@ -23,7 +23,7 @@ func NewSyncTimePacketFromBytes(data []byte) (SyncTimePacket, error) {
 	return packet, nil
 }
 
-//NewReply creates a RPLY packet containing the given CMTime and serializes it to a []byte
+// NewReply creates a RPLY packet containing the given CMTime and serializes it to a []byte
 func (sp SyncTimePacket) NewReply(time coremedia.CMTime) ([]byte, error) {
 	length := 44
 	data := make([]byte, length)

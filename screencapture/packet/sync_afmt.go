@@ -4,8 +4,8 @@ import (
 	"encoding/binary"
 	"fmt"
 
-	"github.com/danielpaulus/quicktime_video_hack/screencapture/common"
-	"github.com/danielpaulus/quicktime_video_hack/screencapture/coremedia"
+	"github.com/DineshKuppan/quicktime_video_hack/screencapture/common"
+	"github.com/DineshKuppan/quicktime_video_hack/screencapture/coremedia"
 )
 
 // SyncAfmtPacket contains what I think is information about the audio format
@@ -35,7 +35,7 @@ func NewSyncAfmtPacketFromBytes(data []byte) (SyncAfmtPacket, error) {
 	return packet, nil
 }
 
-//NewReply returns a []byte containing a correct reploy for afmt
+// NewReply returns a []byte containing a correct reploy for afmt
 func (sp SyncAfmtPacket) NewReply() []byte {
 	responseDict := createResponseDict()
 	dictBytes := coremedia.SerializeStringKeyDict(responseDict)

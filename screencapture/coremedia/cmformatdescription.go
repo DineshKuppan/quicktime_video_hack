@@ -4,13 +4,13 @@ import (
 	"encoding/binary"
 	"fmt"
 
-	"github.com/danielpaulus/quicktime_video_hack/screencapture/common"
+	"github.com/DineshKuppan/quicktime_video_hack/screencapture/common"
 	"github.com/sirupsen/logrus"
 )
 
-//Those are the markers found in the hex dumps.
-//For convenience I have added the ASCII representation as a comment
-//in normal byte order and reverse byteorder (so you can find them in the hex dumps)
+// Those are the markers found in the hex dumps.
+// For convenience I have added the ASCII representation as a comment
+// in normal byte order and reverse byteorder (so you can find them in the hex dumps)
 // Note: I have just guessed what the names could be from the marker ascii, I could be wrong ;-)
 const (
 	FormatDescriptorMagic            uint32 = 0x66647363 //fdsc - csdf
@@ -24,9 +24,9 @@ const (
 	AudioStreamBasicDescriptionMagic uint32 = 0x61736264 //asdb - dbsa
 )
 
-//FormatDescriptor is actually a CMFormatDescription
-//https://developer.apple.com/documentation/coremedia/cmformatdescription
-//https://github.com/phracker/MacOSX-SDKs/blob/master/MacOSX10.9.sdk/System/Library/Frameworks/CoreMedia.framework/Versions/A/Headers/CMFormatDescription.h
+// FormatDescriptor is actually a CMFormatDescription
+// https://developer.apple.com/documentation/coremedia/cmformatdescription
+// https://github.com/phracker/MacOSX-SDKs/blob/master/MacOSX10.9.sdk/System/Library/Frameworks/CoreMedia.framework/Versions/A/Headers/CMFormatDescription.h
 type FormatDescriptor struct {
 	MediaType            uint32
 	VideoDimensionWidth  uint32
@@ -40,7 +40,7 @@ type FormatDescriptor struct {
 	AudioStreamBasicDescription AudioStreamBasicDescription
 }
 
-//NewFormatDescriptorFromBytes parses a CMFormatDescription from bytes
+// NewFormatDescriptorFromBytes parses a CMFormatDescription from bytes
 func NewFormatDescriptorFromBytes(data []byte) (FormatDescriptor, error) {
 
 	_, remainingBytes, err := common.ParseLengthAndMagic(data, FormatDescriptorMagic)
